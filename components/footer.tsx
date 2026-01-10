@@ -6,10 +6,10 @@ export default function Footer() {
           © 2026 Atacama Partners. All rights reserved.
         </p>
         <a
-          href="mailto:ginsu@atacamapartners.com"
+          href="mailto:info@atacamapartners.com"
           className="text-primary hover:underline transition-all duration-300 font-medium"
         >
-          ginsu@atacamapartners.com
+          info@atacamapartners.com
         </a>
       </div>
     </footer>
