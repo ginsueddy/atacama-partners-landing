@@ -56,9 +56,6 @@ export default function ContactSection() {
             <p className="text-xl text-muted-foreground mb-2">
               We've received your message and will be in touch soon.
             </p>
-            <p className="text-lg text-muted-foreground">
-              Expect to hear from us within 24 hours.
-            </p>
           </div>
         )}
       </div>
