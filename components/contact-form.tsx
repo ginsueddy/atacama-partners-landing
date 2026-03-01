@@ -14,7 +14,7 @@ import { Spinner } from './ui/spinner';
 const formSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   email: z.email('Please enter a valid email'),
-  company: z.string().optional(),
+  company: z.url('Please enter a valid company website URL'),
   message: z.string().min(1, 'Please tell us what you want to automate'),
 });
 
@@ -40,7 +40,7 @@ export default function ContactForm(props: Props) {
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('email', data.email);
-    formData.append('company', data.company || '');
+    formData.append('company', data.company);
     formData.append('message', data.message);
 
     const res = await createInboundLead(formData);
@@ -113,17 +113,27 @@ export default function ContactForm(props: Props) {
       <Controller
         name="company"
         control={form.control}
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <div>
             <label htmlFor="company" className="sr-only">
-              Company or Website (optional)
+              Company website
             </label>
             <Input
               {...field}
               id="company"
-              placeholder="Company or website (optional)"
-              className="h-14 text-lg border-input focus:border-ring focus:ring-ring transition-all duration-300"
+              type="url"
+              placeholder="Company website (e.g. https://example.com)"
+              className={`h-14 text-lg border-input focus:border-ring focus:ring-ring transition-all duration-300 ${
+                fieldState.invalid ? 'border-destructive' : ''
+              }`}
+              aria-invalid={fieldState.invalid}
+              aria-describedby={fieldState.invalid ? 'company-error' : undefined}
             />
+            {fieldState.invalid && (
+              <p id="company-error" className="mt-2 text-sm text-destructive">
+                {fieldState.error?.message}
+              </p>
+            )}
           </div>
         )}
       />
