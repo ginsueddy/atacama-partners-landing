@@ -126,3 +126,70 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ===== Father's Day card (one-off page, namespaced fathersday-/fd-) ===== */
+@keyframes fathersday-rise {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-115vh) translateX(var(--fd-sway, 1.5rem)) rotate(16deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fathersday-pop {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(-1.25rem) scale(1.12);
+  }
+  100% {
+    transform: translateY(var(--fd-distance, -16rem)) translateX(var(--fd-sway, 0rem))
+      scale(0.9) rotate(var(--fd-spin, 20deg));
+    opacity: 0;
+  }
+}
+
+@keyframes fathersday-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.4rem);
+  }
+}
+
+.fd-bubble {
+  animation: fathersday-rise var(--fd-duration, 10s) linear infinite;
+  animation-delay: var(--fd-delay, 0s);
+  will-change: transform, opacity;
+}
+
+.fd-pop {
+  animation: fathersday-pop var(--fd-duration, 2.4s) ease-out var(--fd-delay, 0s) forwards;
+  will-change: transform, opacity;
+}
+
+.fd-bob {
+  animation: fathersday-bob 1.9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fd-bubble,
+  .fd-pop,
+  .fd-bob {
+    animation: none;
+  }
+}
